@@ -21,7 +21,7 @@ export default function Map() {
   return (
     <div className='MapWrapper'>
       <div className='MapContainer container'>
-        <MapContainer center={position} zoom={20} style={{ height: '100%', width: '100%' }}>
+        <MapContainer className='LeafletContainer' center={position} zoom={20} style={{ height: '100%', width: '100%' }}>
           <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"> </TileLayer>
           <Marker position={position} icon={LocationMarker}>
             <Popup>Your current location</Popup>

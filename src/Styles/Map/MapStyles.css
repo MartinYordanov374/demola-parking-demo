@@ -1,5 +1,7 @@
 .MapWrapper .MapContainer {
-  border-style: solid;
   height: 80vh;
+  border-radius: 10px;
+}
+.MapWrapper .LeafletContainer {
   border-radius: 10px;
 }/*# sourceMappingURL=MapStyles.css.map */
