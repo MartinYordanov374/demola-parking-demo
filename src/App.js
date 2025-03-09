@@ -3,6 +3,8 @@ import './App.css';
 import {BrowserRouter, Routes, Route} from 'react-router-dom'
 import Home from './Components/HomeComponent/Home.jsx';
 import Error from './Components/Error/Error.jsx';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap-icons/font/bootstrap-icons.css';
 
 function App() {
   return (

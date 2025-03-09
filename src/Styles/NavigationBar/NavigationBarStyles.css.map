@@ -1,1 +1,1 @@
-{"version":3,"sources":[],"names":[],"mappings":"","file":"NavigationBarStyles.css"}
+{"version":3,"sources":["NavigationBarStyles.scss","NavigationBarStyles.css"],"names":[],"mappings":"AACI;EACI,mBAAA;EACA,WAAA;EACA,mBAAA;ACAR","file":"NavigationBarStyles.css"}

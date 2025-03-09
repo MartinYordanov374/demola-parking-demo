@@ -1,1 +1,1 @@
-{"version":3,"sources":[],"names":[],"mappings":"","file":"SearchBarStyles.css"}
+{"version":3,"sources":["SearchBarStyles.scss","SearchBarStyles.css"],"names":[],"mappings":"AACI;EACI,mBAAA;EACA,WAAA;EACA,mBAAA;ACAR","file":"SearchBarStyles.css"}

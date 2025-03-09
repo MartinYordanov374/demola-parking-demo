@@ -1,1 +1,5 @@
-/*# sourceMappingURL=MapStyles.css.map */
+.MapWrapper .MapContainer {
+  border-style: solid;
+  height: 80vh;
+  border-radius: 10px;
+}/*# sourceMappingURL=MapStyles.css.map */
