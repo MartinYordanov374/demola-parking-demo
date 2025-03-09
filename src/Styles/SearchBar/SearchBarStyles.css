@@ -1,5 +1,37 @@
+.wrapper {
+  justify-content: center;
+}
 .wrapper .container {
-  border-style: solid;
   padding: 1%;
   border-radius: 10px;
+}
+.wrapper .container .SearchBarWrapper .SearchIcon {
+  font-size: x-large;
+}
+.wrapper .container .SearchBarWrapper .SearchIcon:hover {
+  cursor: pointer;
+}
+.wrapper .container .SearchBarWrapper .AddressInputField {
+  border-style: none;
+  border-bottom-style: solid;
+}
+.wrapper .container .SearchBarWrapper .AddressInputField:focus {
+  box-shadow: none;
+}
+.wrapper .container .SearchBarWrapper .AddressInputField:hover {
+  background-color: rgb(248, 248, 248);
+}
+.wrapper .container .SearchBarWrapper .SearchIcon {
+  border-style: none;
+  background-color: white;
+}
+.wrapper .container .SearchBarWrapper .SearchIcon:hover {
+  background-color: rgb(248, 248, 248);
+}
+.wrapper .container .GetLocationWrapper .GetLocationIcon {
+  margin-left: 100%;
+  font-size: x-large;
+}
+.wrapper .container .GetLocationWrapper .GetLocationIcon:hover {
+  cursor: pointer;
 }/*# sourceMappingURL=SearchBarStyles.css.map */
