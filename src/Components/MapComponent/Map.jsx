@@ -20,9 +20,8 @@ const MapRecenter= ({ position }) => {
   map.flyTo(position);
 };
 
-export default function Map({mapPosition, setMapPosition, hasMapRecentered, destinationName}) {
+export default function Map({mapPosition, setMapPosition, hasMapRecentered, destinationName, userPosition, setUserPosition}) {
   
-  let [userPosition, setUserPosition] = useState([61.4466610123261, 23.852789195071736]);
   useEffect(() => {
     navigator.geolocation.watchPosition(
       (success) => {
@@ -44,10 +43,12 @@ export default function Map({mapPosition, setMapPosition, hasMapRecentered, dest
           <Marker position={userPosition} icon={LocationMarker}>
             <Popup>Your current location</Popup>
           </Marker>
-          {hasMapRecentered &&
+          {hasMapRecentered && userPosition != mapPosition ?
             <Marker position={mapPosition} icon={DestinationMarker}>
               <Popup>{destinationName}</Popup>
             </Marker>
+            : 
+            ""
           }
         </MapContainer>
       </div>

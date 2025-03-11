@@ -4,7 +4,7 @@ import {InputGroup, FormControl} from 'react-bootstrap'
 import InputGroupText from 'react-bootstrap/esm/InputGroupText'
 import axios from 'axios'
 
-export default function SearchBar({mapPosition, setMapPosition, setHasMapRecentered, setDestinationName}) {
+export default function SearchBar({mapPosition, setMapPosition, setHasMapRecentered, setDestinationName, userPosition}) {
   let [address,setAddress] = useState('')
   const OSM_SEARCH_URL = `https://nominatim.openstreetmap.org/search.php?q=${address}&format=jsonv2`
   const searchLocation = async () => {
@@ -24,6 +24,12 @@ export default function SearchBar({mapPosition, setMapPosition, setHasMapRecente
       alert(err)
     })
   }
+
+  const centerOnUser = async () => {
+   
+      setMapPosition(userPosition)
+      setHasMapRecentered(true)
+  }
   return (
     <div className='container wrapper'>
       <div className='container row'>
@@ -35,7 +41,7 @@ export default function SearchBar({mapPosition, setMapPosition, setHasMapRecente
           
         </div>
         <div className='col-6 GetLocationWrapper'>
-          <i className="bi bi-geo-alt GetLocationIcon"></i>
+          <i className="bi bi-geo-alt GetLocationIcon" onClick={() => {centerOnUser()}}></i>
         </div>
         
       </div>
