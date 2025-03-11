@@ -34,4 +34,26 @@
 }
 .wrapper .container .GetLocationWrapper .GetLocationIcon:hover {
   cursor: pointer;
+}
+.wrapper .RoutesWrapper .closeRoutesIcon {
+  font-size: x-large;
+  margin-left: 96%;
+}
+.wrapper .RoutesWrapper .closeRoutesIcon:hover {
+  cursor: pointer;
+}
+.wrapper .RoutesWrapper .routesIcon {
+  font-size: x-large;
+}
+.wrapper .RoutesWrapper .startingPointIcon {
+  color: blue;
+}
+.wrapper .RoutesWrapper .destinationIcon {
+  color: rgb(208, 0, 0);
+}
+.wrapper .RoutesWrapper .getCurrentPositionIcon {
+  color: rgb(208, 0, 0);
+}
+.wrapper .RoutesWrapper .getCurrentPositionIcon:hover {
+  cursor: pointer;
 }/*# sourceMappingURL=SearchBarStyles.css.map */

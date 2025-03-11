@@ -41,4 +41,29 @@
         }
        
     }
+    .RoutesWrapper{
+        .closeRoutesIcon{
+            font-size: x-large;
+            margin-left: 96%;
+            &:hover{
+                cursor: pointer;
+            }
+        }
+        .routesIcon{
+            font-size: x-large;
+        }
+        .startingPointIcon
+        {
+            color: blue;
+        }
+        .destinationIcon{
+            color: rgb(208, 0, 0);
+        }
+        .getCurrentPositionIcon{
+            color: rgb(208, 0, 0);
+            &:hover{
+                cursor: pointer;
+            }
+        }
+    }
 }
