@@ -11,13 +11,18 @@ const LocationMarker = new Icon({
 
 export default function Map() {
   
-  useEffect(() => {
-    navigator.geolocation.getCurrentPosition(
-      (success)=>{setPosition([success.coords.latitude, success.coords.longitude])}, 
-      (err)=>{console.log(err)}
-    )
-  }, [])
   let [position, setPosition] = useState([61.4466610123261, 23.852789195071736]);
+
+  useEffect(() => {
+    navigator.geolocation.watchPosition(
+      (success) => {
+        setPosition([success.coords.latitude, success.coords.longitude]);
+        console.log(success);
+      },
+      (err) => console.error(err)
+    );
+  }, []);
+  
   return (
     <div className='MapWrapper'>
       <div className='MapContainer container'>
