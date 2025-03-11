@@ -19,9 +19,10 @@ export default function Map() {
         setPosition([success.coords.latitude, success.coords.longitude]);
         console.log(success);
       },
-      (err) => console.error(err)
+      (err) => console.error(err),
+      { enableHighAccuracy: true}
     );
-  }, []);
+  });
   
   return (
     <div className='MapWrapper'>
