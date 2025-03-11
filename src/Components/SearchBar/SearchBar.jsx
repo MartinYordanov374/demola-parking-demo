@@ -6,7 +6,17 @@ import axios from 'axios'
 
 export default function SearchBar({mapPosition, setMapPosition, setHasMapRecentered, setDestinationName, userPosition}) {
   let [address,setAddress] = useState('')
+  let [startingLocation, setStartingLocation] = useState('')
+  let [destination, setDestination] = useState('')
+
+  let [startingLocationCoordinates, setStartingLocationCoordinates] = useState(0)
+  let [destinationCoordinates, setDestinationCoordinates] = useState(0)
+
   const OSM_SEARCH_URL = `https://nominatim.openstreetmap.org/search.php?q=${address}&format=jsonv2`
+  const OSM_SEARCH_STARTING_LOCATION_URL = `https://nominatim.openstreetmap.org/search.php?q=${startingLocation}&format=jsonv2`
+  const OSM_SEARCH_DESTINATION_URL = `https://nominatim.openstreetmap.org/search.php?q=${destination}&format=jsonv2`
+
+  const OSRM_SEARCH_URL = `http://router.project-osrm.org/route/v1/driving/${startingLocation[0]},${startingLocation[1]}; ${destination[0]}, ${destination[1]}?overview=true`
   const searchLocation = async () => {
     let res = await axios.get(OSM_SEARCH_URL)
     .then((res) => 
@@ -31,6 +41,10 @@ export default function SearchBar({mapPosition, setMapPosition, setHasMapRecente
       setHasMapRecentered(true)
   }
 
+  const setStartingUserLocation = () => {
+      setStartingLocation(userPosition)
+  }
+
   const handleRoutesMenuVisibility = () => {
     let targetElement = document.querySelector('.RoutesWrapper')
     if(targetElement.style.display == 'none')
@@ -42,6 +56,40 @@ export default function SearchBar({mapPosition, setMapPosition, setHasMapRecente
       targetElement.style.display = 'none'
     }
   }
+
+  const getRouteCoordinates = async () => {
+    await axios.get(OSM_SEARCH_STARTING_LOCATION_URL)
+    .then((res) => 
+    {
+      let latitude = res.data[0].lat
+      let longitude = res.data[0].lon
+      let position = [latitude, longitude]
+      setStartingLocationCoordinates(position)
+    })
+    .catch((err) => 
+    {
+      alert(err)
+    })
+    
+    await axios.get(OSM_SEARCH_DESTINATION_URL)
+    .then((res) => 
+      {
+        let latitude = res.data[0].lat
+        let longitude = res.data[0].lon
+        let position = [latitude, longitude]
+        setDestinationCoordinates(position)
+      })
+      .catch((err) => 
+      {
+        alert(err)
+      })
+  }
+
+  const getRoute = async () => {
+    await getRouteCoordinates()
+    console.log(startingLocationCoordinates, destinationCoordinates)
+  }
+
   return (
     <div className='container wrapper'>
       <div className='container row'>
@@ -55,14 +103,25 @@ export default function SearchBar({mapPosition, setMapPosition, setHasMapRecente
             <i class="bi bi-x-lg closeRoutesIcon" onClick={() => {handleRoutesMenuVisibility()}}></i>
             <InputGroup>
               <i class="bi bi-geo-alt-fill startingPointIcon routesIcon"></i>
-              <FormControl className='AddressInputField' placeholder='Starting Point' onChange={(e) => setAddress(e.target.value)}/>
-              <i class="bi bi-crosshair getCurrentPositionIcon routesIcon"></i>
+              <FormControl 
+                className='AddressInputField' 
+                placeholder='Starting Point' 
+                onChange={(e) => setStartingLocation(e.target.value)} 
+                value={startingLocation}
+              />
+              <i class="bi bi-crosshair getCurrentPositionIcon routesIcon" onClick={() => setStartingUserLocation()}></i>
             </InputGroup>
             <i class="bi bi-three-dots-vertical routesIcon"></i>
             <InputGroup>
               <i class="bi bi-geo-alt-fill destinationIcon routesIcon"></i>
-              <FormControl className='AddressInputField' placeholder='Destination'/>
+              <FormControl 
+                className='AddressInputField' 
+                placeholder='Destination'
+                onChange={(e) => setDestination(e.target.value)} 
+                value={destination}
+              />
             </InputGroup>
+            <Button onClick={() => getRoute()}>Show route</Button>
           </div>
         </div>
         <div className='col-6 GetLocationWrapper'>
