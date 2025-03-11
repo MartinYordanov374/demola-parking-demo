@@ -11,9 +11,9 @@ export default function SearchBar({mapPosition, setMapPosition, setHasMapRecente
     let res = await axios.get(OSM_SEARCH_URL)
     .then((res) => 
     {
-      let latitude = res.data[0].boundingbox[2]
-      let longitude = res.data[0].boundingbox[0]
-      let position = [longitude, latitude]
+      let latitude = res.data[0].lat
+      let longitude = res.data[0].lon
+      let position = [latitude, longitude]
       setMapPosition(position)
       setHasMapRecentered(true)
     })
