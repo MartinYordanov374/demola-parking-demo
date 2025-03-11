@@ -4,7 +4,7 @@ import {InputGroup, FormControl} from 'react-bootstrap'
 import InputGroupText from 'react-bootstrap/esm/InputGroupText'
 import axios from 'axios'
 
-export default function SearchBar({mapPosition, setMapPosition, setHasMapRecentered}) {
+export default function SearchBar({mapPosition, setMapPosition, setHasMapRecentered, setDestinationName}) {
   let [address,setAddress] = useState('')
   const OSM_SEARCH_URL = `https://nominatim.openstreetmap.org/search.php?q=${address}&format=jsonv2`
   const searchLocation = async () => {
@@ -14,8 +14,10 @@ export default function SearchBar({mapPosition, setMapPosition, setHasMapRecente
       let latitude = res.data[0].lat
       let longitude = res.data[0].lon
       let position = [latitude, longitude]
+      setDestinationName(res.data[0].name)
       setMapPosition(position)
       setHasMapRecentered(true)
+      
     })
     .catch((err) => 
     {

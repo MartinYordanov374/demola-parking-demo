@@ -20,7 +20,7 @@ const MapRecenter= ({ position }) => {
   map.flyTo(position);
 };
 
-export default function Map({mapPosition, setMapPosition, hasMapRecentered}) {
+export default function Map({mapPosition, setMapPosition, hasMapRecentered, destinationName}) {
   
   let [userPosition, setUserPosition] = useState([61.4466610123261, 23.852789195071736]);
   useEffect(() => {
@@ -46,7 +46,7 @@ export default function Map({mapPosition, setMapPosition, hasMapRecentered}) {
           </Marker>
           {hasMapRecentered &&
             <Marker position={mapPosition} icon={DestinationMarker}>
-              <Popup>Your target location</Popup>
+              <Popup>{destinationName}</Popup>
             </Marker>
           }
         </MapContainer>
