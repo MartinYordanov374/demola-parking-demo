@@ -41,7 +41,7 @@ export default function SearchBar({mapPosition, setMapPosition, setHasMapRecente
           
         </div>
         <div className='col-6 GetLocationWrapper'>
-          <i className="bi bi-geo-alt GetLocationIcon" onClick={() => {centerOnUser()}}></i>
+          <i className="bi bi-crosshair GetLocationIcon" onClick={() => {centerOnUser()}}></i>
         </div>
         
       </div>
