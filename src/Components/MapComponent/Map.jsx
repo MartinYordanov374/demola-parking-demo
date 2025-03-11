@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import '../../Styles/Map/MapStyles.css'
-import { MapContainer, TileLayer, Marker, Popup, useMap } from "react-leaflet";
+import { MapContainer, TileLayer, Marker, Popup, useMap, Polyline } from "react-leaflet";
+import polyline from "@mapbox/polyline"; 
 import 'leaflet/dist/leaflet.css';
 import { Icon } from 'leaflet'
 import LocationIcon from '../../Icons/dot.svg'
@@ -20,8 +21,7 @@ const MapRecenter= ({ position }) => {
   map.flyTo(position);
 };
 
-export default function Map({mapPosition, setMapPosition, hasMapRecentered, destinationName, userPosition, setUserPosition}) {
-  
+export default function Map({mapPosition, setMapPosition, hasMapRecentered, destinationName, userPosition, setUserPosition, route}) {
   useEffect(() => {
     navigator.geolocation.watchPosition(
       (success) => {
@@ -50,7 +50,8 @@ export default function Map({mapPosition, setMapPosition, hasMapRecentered, dest
             : 
             ""
           }
-        </MapContainer>
+          {route.length > 0 && <Polyline positions={polyline.decode(route)} color="blue" />}
+      </MapContainer>
       </div>
     </div>
   )

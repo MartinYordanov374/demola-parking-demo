@@ -3,8 +3,9 @@ import '../../Styles/SearchBar/SearchBarStyles.css'
 import {InputGroup, FormControl, Button} from 'react-bootstrap'
 import InputGroupText from 'react-bootstrap/esm/InputGroupText'
 import axios from 'axios'
+import L from 'leaflet'
 
-export default function SearchBar({mapPosition, setMapPosition, setHasMapRecentered, setDestinationName, userPosition}) {
+export default function SearchBar({mapPosition, setMapPosition, setHasMapRecentered, setDestinationName, userPosition, setRoute}) {
   let [address,setAddress] = useState('')
   let [startingLocation, setStartingLocation] = useState('')
   let [destination, setDestination] = useState('')
@@ -16,7 +17,7 @@ export default function SearchBar({mapPosition, setMapPosition, setHasMapRecente
   const OSM_SEARCH_STARTING_LOCATION_URL = `https://nominatim.openstreetmap.org/search.php?q=${startingLocation}&format=jsonv2`
   const OSM_SEARCH_DESTINATION_URL = `https://nominatim.openstreetmap.org/search.php?q=${destination}&format=jsonv2`
 
-  const OSRM_SEARCH_URL = `http://router.project-osrm.org/route/v1/driving/${startingLocation[0]},${startingLocation[1]}; ${destination[0]}, ${destination[1]}?overview=true`
+  const OSRM_SEARCH_URL = `http://router.project-osrm.org/route/v1/driving/${startingLocationCoordinates[1]},${startingLocationCoordinates[0]};${destinationCoordinates[1]},${destinationCoordinates[0]}`
   const searchLocation = async () => {
     let res = await axios.get(OSM_SEARCH_URL)
     .then((res) => 
@@ -87,8 +88,17 @@ export default function SearchBar({mapPosition, setMapPosition, setHasMapRecente
 
   const getRoute = async () => {
     await getRouteCoordinates()
-    console.log(startingLocationCoordinates, destinationCoordinates)
+    await axios.get(OSRM_SEARCH_URL)
+    .then((res) => {
+      console.log(res)
+      const route = res.data.routes[0].geometry; // Extract the route geometry
+      setRoute(route)
+    })
+    .catch((err) => {
+      console.log(err)
+    })
   }
+
 
   return (
     <div className='container wrapper'>
